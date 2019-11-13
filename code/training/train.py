@@ -69,7 +69,7 @@ data = {"train": {"X": X_train, "y": y_train},
 print("Running train.py")
 
 # Randomly pic alpha
-alphas = np.arange(0.1, 0.2, 0.3)
+alphas = np.arange(0.0, 0.5, 0.01)
 alpha = alphas[np.random.choice(alphas.shape[0], 1, replace=False)][0]
 print(alpha)
 run.log("alpha", alpha)
