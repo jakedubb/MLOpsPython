@@ -62,14 +62,14 @@ ws = run.experiment.workspace
 X, y = load_diabetes(return_X_y=True)
 columns = ["age", "gender", "bmi", "bp", "s1", "s2", "s3", "s4", "s5", "s6"]
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=0)
+    X, y, test_size=0.3, random_state=0)
 data = {"train": {"X": X_train, "y": y_train},
         "test": {"X": X_test, "y": y_test}}
 
 print("Running train.py")
 
 # Randomly pic alpha
-alphas = np.arange(2.0, 3.0, 4.0)
+alphas = np.arange(0.1, 0.2, 0.3)
 alpha = alphas[np.random.choice(alphas.shape[0], 1, replace=False)][0]
 print(alpha)
 run.log("alpha", alpha)
