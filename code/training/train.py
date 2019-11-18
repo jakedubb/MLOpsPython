@@ -89,7 +89,7 @@ tabular_explainer = TabularExplainer(reg,
                                      initialization_examples=X_train,
                                      features=columns)
 # explain overall model predictions (global explanation)
-# passing in test dataset for evaluation examples 
+# passing in test dataset for evaluation examples
 
 global_explanation = tabular_explainer.explain_global(X_test)
 
