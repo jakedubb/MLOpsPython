@@ -34,12 +34,19 @@ from sklearn.externals import joblib
 import numpy as np
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 from interpret.ext.blackbox import TabularExplainer
 from azureml.contrib.explain.model.explanation.explanation_client import (
  ExplanationClient
 )
 =======
 >>>>>>> parent of 68afd78... updated build pipeline with explainability
+=======
+from azureml.contrib.explain.model.visualize import ExplanationDashboard
+from interpret.ext.blackbox import TabularExplainer
+from azureml.contrib.explain.model.explanation.explanation_client import ExplanationClient
+from azureml.core.model import Model
+>>>>>>> parent of 7b1e781... Update train.py
 
 parser = argparse.ArgumentParser("train")
 parser.add_argument(
@@ -86,13 +93,27 @@ preds = reg.predict(data["test"]["X"])
 run.log("mse", mean_squared_error(preds, data["test"]["y"]))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+# Save model as part of the run history
+
+# model_name = "."
+
+    
+>>>>>>> parent of 7b1e781... Update train.py
 # create an explainer to validate or debug the model
 tabular_explainer = TabularExplainer(reg,
                                      initialization_examples=X_train,
                                      features=columns)
 # explain overall model predictions (global explanation)
+<<<<<<< HEAD
 # passing in test dataset for evaluation examples
 
+=======
+# passing in test dataset for evaluation examples - note it must be a representative sample of the original data
+# more data (e.g. x_train) will likely lead to higher accuracy, but at a time cost
+>>>>>>> parent of 7b1e781... Update train.py
 global_explanation = tabular_explainer.explain_global(X_test)
 
 # uploading model explanation data for storage or visualization
