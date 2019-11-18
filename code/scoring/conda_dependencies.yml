@@ -56,5 +56,5 @@ dependencies:
   - azureml-core
   - azureml-telemetry
   - azureml-interpret
-  - pandas
+
 
