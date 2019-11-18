@@ -51,4 +51,10 @@ dependencies:
   - gunicorn==19.9.0
   - flask==1.1.1
   - azure-ml-api-sdk
+  - azureml-defaults
+  - azureml-contrib-interpret
+  - azureml-core
+  - azureml-telemetry
+  - azureml-interpret
+  - pandas
 
