@@ -34,10 +34,10 @@ from sklearn.model_selection import train_test_split
 from sklearn.externals import joblib
 import numpy as np
 
-from azureml.contrib.explain.model.visualize import ExplanationDashboard
 from interpret.ext.blackbox import TabularExplainer
-from azureml.contrib.explain.model.explanation.explanation_client import ExplanationClient
-from azureml.core.model import Model
+from azureml.contrib.explain.model.explanation.explanation_client import (
+ ExplanationClient
+)
 
 parser = argparse.ArgumentParser("train")
 parser.add_argument(
@@ -84,19 +84,13 @@ reg.fit(data["train"]["X"], data["train"]["y"])
 preds = reg.predict(data["test"]["X"])
 run.log("mse", mean_squared_error(preds, data["test"]["y"]))
 
-
-# Save model as part of the run history
-
-# model_name = "."
-
-    
 # create an explainer to validate or debug the model
 tabular_explainer = TabularExplainer(reg,
                                      initialization_examples=X_train,
                                      features=columns)
 # explain overall model predictions (global explanation)
-# passing in test dataset for evaluation examples - note it must be a representative sample of the original data
-# more data (e.g. x_train) will likely lead to higher accuracy, but at a time cost
+# passing in test dataset for evaluation examples 
+
 global_explanation = tabular_explainer.explain_global(X_test)
 
 # uploading model explanation data for storage or visualization
