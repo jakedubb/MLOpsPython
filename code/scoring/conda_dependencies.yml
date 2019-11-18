@@ -51,10 +51,13 @@ dependencies:
   - gunicorn==19.9.0
   - flask==1.1.1
   - azure-ml-api-sdk
+<<<<<<< HEAD
   - azureml-defaults
   - azureml-contrib-interpret
   - azureml-core
   - azureml-telemetry
   - azureml-interpret
 
+=======
+>>>>>>> parent of 68afd78... updated build pipeline with explainability
 
