@@ -53,6 +53,7 @@ def main():
         pip_packages=['azure', 'azureml-core',
                       'azure-storage',
                       'azure-storage-blob', 'azureml-defaults',
+                      'azureml-contrib-explain-model',
                       'azureml-contrib-interpret',
                       'azureml-telemetry',
                       'azureml-interpret',
