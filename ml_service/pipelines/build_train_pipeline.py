@@ -52,7 +52,12 @@ def main():
                         'scikit-learn', 'tensorflow', 'keras'],
         pip_packages=['azure', 'azureml-core',
                       'azure-storage',
-                      'azure-storage-blob'])
+                      'azure-storage-blob', 'azureml-defaults',
+                      'azureml-contrib-interpret',
+                      'azureml-telemetry',
+                      'azureml-interpret',
+                      'sklearn-pandas',
+                      'azureml-dataprep'])
     )
     run_config.environment.docker.enabled = True
 

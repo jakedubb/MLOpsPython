@@ -30,8 +30,14 @@ from sklearn.datasets import load_diabetes
 from sklearn.linear_model import Ridge
 from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import train_test_split
+
 from sklearn.externals import joblib
 import numpy as np
+
+from interpret.ext.blackbox import TabularExplainer
+from azureml.contrib.explain.model.explanation.explanation_client import (
+ ExplanationClient
+)
 
 parser = argparse.ArgumentParser("train")
 parser.add_argument(
@@ -57,6 +63,7 @@ release_id = args.release_id
 run = Run.get_context()
 exp = run.experiment
 ws = run.experiment.workspace
+client = ExplanationClient.from_run(run)
 
 X, y = load_diabetes(return_X_y=True)
 columns = ["age", "gender", "bmi", "bp", "s1", "s2", "s3", "s4", "s5", "s6"]
@@ -76,6 +83,19 @@ reg = Ridge(alpha=alpha)
 reg.fit(data["train"]["X"], data["train"]["y"])
 preds = reg.predict(data["test"]["X"])
 run.log("mse", mean_squared_error(preds, data["test"]["y"]))
+
+# create an explainer to validate or debug the model
+tabular_explainer = TabularExplainer(reg,
+                                     initialization_examples=X_train,
+                                     features=columns)
+# explain overall model predictions (global explanation)
+# passing in test dataset for evaluation examples
+
+global_explanation = tabular_explainer.explain_global(X_test)
+
+# uploading model explanation data for storage or visualization
+comment = 'Global explanation on of Diabetes Regression'
+client.upload_model_explanation(global_explanation, comment=comment)
 
 with open(model_name, "wb") as file:
     joblib.dump(value=reg, filename=model_name)
